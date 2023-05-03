@@ -1,4 +1,4 @@
-package com.ngplus.weatherapp.ui.theme
+package com.ngplus.weatherapp.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
