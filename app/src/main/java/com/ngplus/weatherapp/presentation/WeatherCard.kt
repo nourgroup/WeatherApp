@@ -1,6 +1,7 @@
 package com.ngplus.weatherapp.presentation
 
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,41 +20,47 @@ fun WeatherCard(
     backgroundColor : Color,
     modifier : Modifier = Modifier.padding(16.dp)
 ){
-    state.weatherInfo?.currentWeatherData?.let{ data ->
-        Card(
-            backgroundColor = backgroundColor,
-            shape = RoundedCornerShape(10.dp),
-            modifier = modifier.padding(16.dp)
-        ){
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
+    if(state.isLoading){
+        Text("is loading ..")
+    }else{
+        Log.i("Weather_Project","state : $state")
+        state.weatherInfo?.currentWeatherData?.let{ data ->
+            Card(
+                backgroundColor = backgroundColor,
+                shape = RoundedCornerShape(10.dp),
+                modifier = modifier.padding(16.dp)
             ){
-                Text(
-                    text = "Today ${data.time}",
-                    modifier = Modifier.align(Alignment.End),
-                    color = Color.White
-                )
-                Image(
-                    painter = painterResource(id = data.weatherType.iconRes),
-                    contentDescription = null,
-                    modifier = Modifier.width(200.dp)
-                )
-                Text(
-                    text = "Today ${data.temperatureCelsius}",
-                    modifier = Modifier.align(Alignment.End),
-                    color = Color.White
-                )
-                Spacer(
-                    modifier = Modifier.height(16.dp)
-                )
-                Text(
-                    text = "Today ${data.humidity}",
-                    modifier = Modifier.align(Alignment.End),
-                    color = Color.White
-                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ){
+                    Text(
+                        text = "Today ${data.time}",
+                        modifier = Modifier.align(Alignment.End),
+                        color = Color.White
+                    )
+                    Image(
+                        painter = painterResource(id = data.weatherType.iconRes),
+                        contentDescription = null,
+                        modifier = Modifier.width(200.dp)
+                    )
+                    Text(
+                        text = "Today ${data.temperatureCelsius}",
+                        modifier = Modifier.align(Alignment.End),
+                        color = Color.White
+                    )
+                    Spacer(
+                        modifier = Modifier.height(16.dp)
+                    )
+                    Text(
+                        text = "Today ${data.humidity}",
+                        modifier = Modifier.align(Alignment.End),
+                        color = Color.White
+                    )
+                }
             }
         }
     }
+
 }
